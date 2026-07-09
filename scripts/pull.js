@@ -1,6 +1,9 @@
 import pathUtil from 'node:path';
 import fs from 'node:fs';
 
+const DEFAULT_TAGS = new Set(['dash']);
+const LIBRARY = 'dash';
+
 /**
  * @param {string} path
  * @returns {boolean}
@@ -19,13 +22,10 @@ const isDirectorySync = path => {
 
 /**
  * @param {string} type
+ * @param {string} scratchGui
  */
-const pullAssetsOfType = type => {
+const pullAssetsOfType = (type, scratchGui) => {
     console.log(`Generating Dash ${type} library for scratch-gui...`);
-    const scratchGui = pathUtil.join(__dirname, '../../scratch-gui');
-    if (!isDirectorySync(scratchGui)) {
-        throw new Error('Could not find scratch-gui.');
-    }
 
     const assetsDirectory = pathUtil.join(__dirname, `../${type}`);
     if (!isDirectorySync(assetsDirectory)) {
@@ -51,8 +51,12 @@ const pullAssetsOfType = type => {
         } catch (_) {
             throw new Error(`Invaild metadata of ${assetFilename} (${type}).`);
         }
+        const assetTags = Array.isArray(jsonMetadata.tags)
+            ? new Set(jsonMetadata.tags)
+            : new Set();
+        jsonMetadata.tags = DEFAULT_TAGS.union(assetTags).values().toArray();
         jsonMetadata.src = {
-            library: 'dash',
+            library: LIBRARY,
             path: `/${type}/${encodeURIComponent(assetFile)}`
         };
         guiDashAssets.push(jsonMetadata);
@@ -64,9 +68,13 @@ const pullAssetsOfType = type => {
 
 const pullEverything = () => {
     try {
-        pullAssetsOfType('backdrops');
-        pullAssetsOfType('costumes');
-        pullAssetsOfType('sounds');
+        const scratchGui = pathUtil.join(__dirname, '../../scratch-gui');
+        if (!isDirectorySync(scratchGui)) {
+            throw new Error('Could not find scratch-gui.');
+        }
+        pullAssetsOfType('backdrops', scratchGui);
+        pullAssetsOfType('costumes', scratchGui);
+        pullAssetsOfType('sounds', scratchGui);
     } catch (e) {
         console.error(e);
         process.exit(1);
