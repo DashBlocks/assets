@@ -1,0 +1,14 @@
+{
+    "name": "Cookie",
+    "tags": [
+        "food",
+        "sweets",
+        "bakery",
+        "baking",
+        "mr eat"
+    ],
+    "bitmapResolution": 1,
+    "dataFormat": "svg",
+    "rotationCenterX": 34,
+    "rotationCenterY": 30.5
+}

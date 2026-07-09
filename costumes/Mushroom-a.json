@@ -1,0 +1,10 @@
+{
+    "name": "Mushroom-a",
+    "tags": [
+        "forest"
+    ],
+    "bitmapResolution": 1,
+    "dataFormat": "svg",
+    "rotationCenterX": 13.5,
+    "rotationCenterY": 11.5
+}

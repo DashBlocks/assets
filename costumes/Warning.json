@@ -1,0 +1,12 @@
+{
+    "name": "Warning",
+    "tags": [
+        "ui",
+        "icons",
+        "symbols"
+    ],
+    "bitmapResolution": 1,
+    "dataFormat": "svg",
+    "rotationCenterX": 40.5,
+    "rotationCenterY": 40
+}

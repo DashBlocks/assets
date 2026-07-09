@@ -84,7 +84,9 @@ const genMetadata4AssetsOfType = async type => {
         if (!('tags' in jsonMetadata)) {
             changed = true;
             const tagsString = await prompt(`${assetFilename} (${type}): Enter the tags separated by commas...`);
-            jsonMetadata.tags = new Set(tagsString.split(',')).values().toArray();
+            jsonMetadata.tags = tagsString.length
+                ? new Set(tagsString.split(',')).values().toArray()
+                : [];
         }
         switch (type) {
             case 'backdrops':

@@ -1,0 +1,15 @@
+{
+    "name": "Cake2",
+    "tags": [
+        "food",
+        "sweets",
+        "bakery",
+        "baking",
+        "sprinkles",
+        "sprankles"
+    ],
+    "bitmapResolution": 1,
+    "dataFormat": "svg",
+    "rotationCenterX": 69.5,
+    "rotationCenterY": 58.5
+}

@@ -1,0 +1,11 @@
+{
+    "name": "House-a",
+    "tags": [
+        "thing",
+        "architecture"
+    ],
+    "bitmapResolution": 1,
+    "dataFormat": "svg",
+    "rotationCenterX": 191.5,
+    "rotationCenterY": 149
+}
