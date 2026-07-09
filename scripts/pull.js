@@ -1,5 +1,9 @@
+import { fileURLToPath } from "node:url";
 import pathUtil from 'node:path';
 import fs from 'node:fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = pathUtil.dirname(__filename);
 
 const DEFAULT_TAGS = new Set(['dash']);
 const LIBRARY = 'dash';

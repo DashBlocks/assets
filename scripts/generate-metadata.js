@@ -1,8 +1,12 @@
+import { fileURLToPath } from "node:url";
 import pathUtil from 'node:path';
 import fs from 'node:fs';
 import readline from 'node:readline';
 import {imageSizeFromFile} from 'image-size/fromFile';
 import {parseFile as getSoundMetadata} from 'music-metadata';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = pathUtil.dirname(__filename);
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -11,7 +15,7 @@ const rl = readline.createInterface({
 
 /**
  * @param {string} title
- * @returns {string}
+ * @returns {Promise<string>}
  */
 const prompt = title => new Promise((resolve) => rl.question(`${title} `, (answer) => resolve(answer)));
 
@@ -71,7 +75,7 @@ const genMetadata4AssetsOfType = async type => {
         switch (type) {
             case 'backdrops':
             case 'costumes': {
-                const dimensions = await imageSizeFromFile(assetFile);
+                const dimensions = await imageSizeFromFile(pathUtil.join(assetsDirectory, assetFile));
 
                 if (!('bitmapResolution' in jsonMetadata)) {
                     if (pathUtil.extname(assetFile) === '.svg') {
@@ -101,22 +105,25 @@ const genMetadata4AssetsOfType = async type => {
                         ? parseFloat(answer)
                         : dimensions.height / 2;
                 }
+                break;
             }
             case 'sounds': {
-                const soundMetadata = await getSoundMetadata(assetFile);
+                const soundMetadata = await getSoundMetadata(pathUtil.join(assetsDirectory, assetFile));
 
                 if (!('dataFormat' in jsonMetadata)) {
                     jsonMetadata.dataFormat = '';
                 }
                 if (!('sampleCount' in jsonMetadata)) {
-                    jsonMetadata.sampleCount = Math.round(soundMetadata.format.sampleRate * soundMetadata.format.duration);
+                    jsonMetadata.sampleCount = soundMetadata.format.numberOfSamples;
                 }
                 if (!('rate' in jsonMetadata)) {
                     jsonMetadata.rate = soundMetadata.format.sampleRate;
                 }
+                break;
             }
         }
 
+        console.log(`Metadata result of ${assetFilename} (${type}):`, jsonMetadata);
         fs.writeFileSync(metadataFile, JSON.stringify(jsonMetadata, null, 4));
     }
 };
