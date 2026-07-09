@@ -37,19 +37,25 @@ const pullAssetsOfType = type => {
     const assetsFiles = fs.readdirSync(assetsDirectory)
         .filter(name => pathUtil.extname(name) !== '.json');
     for (const assetFile of assetsFiles) {
-        const metadataFile = pathUtil.join(assetsDirectory, `${pathUtil.parse(assetFile).name}.json`);
+        const assetFilename = pathUtil.parse(assetFile).name;
+        const metadataFile = pathUtil.join(assetsDirectory, `${assetFilename}.json`);
         let rawMetadata;
         try {
             rawMetadata = fs.readFileSync(metadataFile);
-        } catch (e) {
-            throw new Error(`Failed to read metadata of ${pathUtil.parse(assetFile).name} (${type}).`);
+        } catch (_) {
+            throw new Error(`Failed to read metadata of ${assetFilename} (${type}).`);
         }
         let jsonMetadata;
         try {
             jsonMetadata = JSON.parse(rawMetadata);
-        } catch (e) {
-            throw new Error(`Invaild metadata of ${pathUtil.parse(assetFile).name} (${type}).`);
+        } catch (_) {
+            throw new Error(`Invaild metadata of ${assetFilename} (${type}).`);
         }
+        jsonMetadata.src = {
+            library: 'dash',
+            path: `/${type}/${encodeURIComponent(assetFile)}`
+        };
+        guiDashAssets.push(jsonMetadata);
     }
         
     const guiDashAssetsFile = pathUtil.join(scratchGui, `src/lib/libraries/dash-assets/generated-${type}.json`);
@@ -59,6 +65,8 @@ const pullAssetsOfType = type => {
 const pullEverything = () => {
     try {
         pullAssetsOfType('backdrops');
+        pullAssetsOfType('costumes');
+        pullAssetsOfType('sounds');
     } catch (e) {
         console.error(e);
         process.exit(1);
