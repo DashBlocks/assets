@@ -1,0 +1,9 @@
+{
+	"name": "dash-assets",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"metagen": "node scripts/generate-metadata.js",
+		"pull": "node scripts/pull.js"
+	}
+}
