@@ -79,7 +79,8 @@ const genMetadata4AssetsOfType = async type => {
         let changed = false;
         if (!('name' in jsonMetadata)) {
             changed = true;
-            jsonMetadata.name = await prompt(`${assetFilename} (${type}): Enter the asset name... (empty for filename)`) || assetFilename;
+            jsonMetadata.name =
+                await prompt(`${assetFilename} (${type}): Enter the asset name... (empty for filename)`) || assetFilename;
         }
         if (!('tags' in jsonMetadata)) {
             changed = true;
@@ -98,7 +99,8 @@ const genMetadata4AssetsOfType = async type => {
                     if (pathUtil.extname(assetFile) === '.svg') {
                         jsonMetadata.bitmapResolution = 1;
                     } else {
-                        const answer = await prompt(`${assetFilename} (${type}): Enter the bitmap resolution... (empty for auto-calculated)`);
+                        const answer =
+                            await prompt(`${assetFilename} (${type}): Enter the bitmap resolution... (empty for auto-calculated)`);
                         jsonMetadata.bitmapResolution = answer
                             ? parseFloat(answer)
                             : Math.max(1, Math.min(
@@ -113,14 +115,16 @@ const genMetadata4AssetsOfType = async type => {
                 }
                 if (!('rotationCenterX' in jsonMetadata)) {
                     changed = true;
-                    const answer = await prompt(`${assetFilename} (${type}): Enter X of the rotation center... (empty for centered)`);
+                    const answer =
+                        await prompt(`${assetFilename} (${type}): Enter X of the rotation center... (empty for centered)`);
                     jsonMetadata.rotationCenterX = answer
                         ? parseFloat(answer)
                         : dimensions.width / 2;
                 }
                 if (!('rotationCenterY' in jsonMetadata)) {
                     changed = true;
-                    const answer = await prompt(`${assetFilename} (${type}): Enter Y of the rotation center... (empty for centered)`);
+                    const answer =
+                        await prompt(`${assetFilename} (${type}): Enter Y of the rotation center... (empty for centered)`);
                     jsonMetadata.rotationCenterY = answer
                         ? parseFloat(answer)
                         : dimensions.height / 2;
@@ -128,7 +132,8 @@ const genMetadata4AssetsOfType = async type => {
                 break;
             }
             case 'sounds': {
-                const soundMetadata = await getSoundMetadata(pathUtil.join(assetsDirectory, assetFile));
+                const {format: formatMetadata} =
+                    await getSoundMetadata(pathUtil.join(assetsDirectory, assetFile));
 
                 if (!('dataFormat' in jsonMetadata)) {
                     changed = true;
@@ -136,16 +141,19 @@ const genMetadata4AssetsOfType = async type => {
                 }
                 if (!('sampleCount' in jsonMetadata)) {
                     changed = true;
-                    jsonMetadata.sampleCount = soundMetadata.format.numberOfSamples;
+                    jsonMetadata.sampleCount = formatMetadata.numberOfSamples ??
+                        // Fallback method of getting sample count
+                        Math.round(formatMetadata.sampleRate * formatMetadata.duration);
                 }
                 if (!('rate' in jsonMetadata)) {
                     changed = true;
-                    jsonMetadata.rate = soundMetadata.format.sampleRate;
+                    jsonMetadata.rate = formatMetadata.sampleRate;
                 }
                 break;
             }
         }
 
+        // Write/rewrite metadata and log result only if it changed
         if (changed) {
             // Normalize order of metadata props
             jsonMetadata = Object.fromEntries(Object.entries(jsonMetadata).sort(
