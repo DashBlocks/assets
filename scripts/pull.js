@@ -72,9 +72,13 @@ const pullAssetsOfType = (type, scratchGui) => {
 
 const pullEverything = () => {
     try {
-        const scratchGui = pathUtil.join(__dirname, '../../scratch-gui');
+        let scratchGui = pathUtil.join(__dirname, '../../scratch-gui');
         if (!isDirectorySync(scratchGui)) {
-            throw new Error('Could not find scratch-gui.');
+            // scratch-gui/node_modules/assets/scripts
+            scratchGui = pathUtil.join(__dirname, '../../..');
+            if (!isDirectorySync(scratchGui)) {
+                throw new Error('Could not find scratch-gui.');
+            }
         }
         pullAssetsOfType('backdrops', scratchGui);
         pullAssetsOfType('costumes', scratchGui);
