@@ -67,6 +67,8 @@ const pullAssetsOfType = (type, scratchGui) => {
     }
         
     const guiDashAssetsFile = pathUtil.join(scratchGui, `src/lib/libraries/dash-assets/generated-${type}.json`);
+    const dir = pathUtil.dirname(guiDashAssetsFile);
+    fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(guiDashAssetsFile, JSON.stringify(guiDashAssets, null, 4));
 };
 
@@ -74,7 +76,7 @@ const pullEverything = () => {
     try {
         let scratchGui = pathUtil.join(__dirname, '../../scratch-gui');
         if (!isDirectorySync(scratchGui)) {
-            // scratch-gui/node_modules/assets/scripts
+            // scratch-gui/node_modules/dash-assets/scripts
             scratchGui = pathUtil.join(__dirname, '../../..');
             if (!isDirectorySync(scratchGui)) {
                 throw new Error('Could not find scratch-gui.');
