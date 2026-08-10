@@ -1,9 +1,10 @@
 {
-    "name": "flask",
+    "name": "Voxel Icon-a",
     "tags": [
         "icons",
         "symbols"
     ],
+    "license": "CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/>",
     "bitmapResolution": 1,
     "dataFormat": "svg",
     "rotationCenterX": 72,
