@@ -1,12 +1,13 @@
 {
-    "name": "Arrow2",
+    "name": "button-c",
     "tags": [
         "icons",
         "symbols",
-        "down"
+        "blue",
+        "games"
     ],
     "bitmapResolution": 1,
     "dataFormat": "svg",
-    "rotationCenterX": 27.5,
-    "rotationCenterY": 27.5
+    "rotationCenterX": 46,
+    "rotationCenterY": 46
 }
