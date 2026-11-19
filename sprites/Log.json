@@ -1,4 +1,8 @@
 {
+    "name": "Log",
+    "tags": [
+        "wood"
+    ],
     "costumes": [
         "Log.svg"
     ],

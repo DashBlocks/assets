@@ -1,4 +1,10 @@
 {
+    "name": "Warning",
+    "tags": [
+        "ui",
+        "icons",
+        "symbols"
+    ],
     "costumes": [
         "Warning.svg"
     ],

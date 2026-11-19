@@ -1,4 +1,10 @@
 {
+    "name": "Button6",
+    "tags": [
+        "ui",
+        "blue",
+        "games"
+    ],
     "costumes": [
         "Button6.svg"
     ],

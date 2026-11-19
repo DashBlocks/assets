@@ -1,4 +1,12 @@
 {
+    "name": "Cookie",
+    "tags": [
+        "food",
+        "sweets",
+        "bakery",
+        "baking",
+        "mr eat"
+    ],
     "costumes": [
         "Cookie.svg"
     ],

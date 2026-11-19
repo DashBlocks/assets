@@ -11,6 +11,7 @@ const __dirname = pathUtil.dirname(__filename);
 const METADATA_PROPS_ORDER = [
     'name',
     'tags',
+    'license',
     'bitmapResolution',
     'dataFormat',
     'rotationCenterX',

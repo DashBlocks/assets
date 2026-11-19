@@ -1,4 +1,9 @@
 {
+    "name": "Voxel Icon",
+    "tags": [
+        "icons",
+        "symbols"
+    ],
     "costumes": [
         "Voxel Icon-a.svg",
         "Voxel Icon-b.svg",

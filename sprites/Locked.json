@@ -1,4 +1,10 @@
 {
+    "name": "Locked",
+    "tags": [
+        "ui",
+        "icons",
+        "symbols"
+    ],
     "costumes": [
         "Locked.svg"
     ],

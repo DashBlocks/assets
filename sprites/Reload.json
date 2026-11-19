@@ -1,4 +1,11 @@
 {
+    "name": "Reload",
+    "tags": [
+        "ui",
+        "icons",
+        "symbols",
+        "black"
+    ],
     "costumes": [
         "Reload.svg"
     ],

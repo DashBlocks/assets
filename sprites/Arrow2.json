@@ -1,4 +1,10 @@
 {
+    "name": "Arrow2",
+    "tags": [
+        "icons",
+        "symbols",
+        "down"
+    ],
     "costumes": [
         "Arrow2.svg"
     ],

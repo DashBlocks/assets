@@ -1,4 +1,11 @@
 {
+    "name": "Button7",
+    "tags": [
+        "icons",
+        "symbols",
+        "up",
+        "black"
+    ],
     "costumes": [
         "Button7.svg"
     ],

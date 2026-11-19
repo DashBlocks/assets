@@ -1,4 +1,9 @@
 {
+    "name": "Campfire",
+    "tags": [
+        "wood",
+        "fire"
+    ],
     "costumes": [
         "Campfire-a.svg",
         "Campfire-b.svg",
