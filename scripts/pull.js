@@ -171,7 +171,6 @@ const pullSprites = scratchGui => {
                     (t, costumeFilename) => `${costumeFilename} (${t}) in ${filename} (sprites)`
                 );
                 delete costumeMetadata.tags;
-                delete costumeMetadata.src;
                 return costumeMetadata;
             });
         } else {
@@ -187,7 +186,6 @@ const pullSprites = scratchGui => {
                     (t, soundFilename) => `${soundFilename} (${t}) in ${filename} (sprites)`
                 );
                 delete soundMetadata.tags;
-                delete soundMetadata.src;
                 return soundMetadata;
             });
         } else {
